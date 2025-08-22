@@ -1,0 +1,20 @@
+# Domaines locaux (pas utile ici, envoi only)
+myhostname = mail.coolify.local
+myorigin = $myhostname
+inet_interfaces = all
+inet_protocols = ipv4
+
+# Pas de réception
+smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
+mydestination =
+
+# Relay host (optionnel si tu veux tout sortir directement)
+relayhost = [$RELAYHOST]:587
+
+# Auth si tu passes par un relay externe
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous
+smtp_use_tls = yes
+smtp_tls_security_level = may
+smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
